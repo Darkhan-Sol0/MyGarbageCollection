@@ -6,14 +6,21 @@
 
 myOpenGLWidget::myOpenGLWidget(QWidget *parent) : QOpenGLWidget{parent} {
   setlocale(LC_ALL, "");
-  proj_x = 2.0;
-  proj_y = 2.0;
-  proj_z = 5.0;
+  this->proj_x = 2.0;
+  this->proj_y = 2.0;
+  this->proj_z = 5.0;
   load_settings();
-  obj = nullptr;
+  this->obj = nullptr;
+  this->pars = new s21::s21_parser();
 }
 
-myOpenGLWidget::~myOpenGLWidget() { save_settings(); }
+myOpenGLWidget::~myOpenGLWidget() { 
+  save_settings(); 
+  if (this->pars != nullptr) {
+    delete this->pars;
+    this->pars = nullptr;
+  }
+}
 
 void myOpenGLWidget::set_vp_color(double r, double g, double b, double a) {
   settings.vp_color_r = r;
@@ -51,9 +58,7 @@ void myOpenGLWidget::scale_model(double scale_value) {
 }
 
 void myOpenGLWidget::parse_obj(char *fileName) {
-  delete obj;
-  this->obj = new s21::s21_obj();
-  obj->ParsingFile(fileName);
+  this->obj = this->pars->ParsingFile(fileName);
 }
 
 void myOpenGLWidget::set_line_type(int type) {

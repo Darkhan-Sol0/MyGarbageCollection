@@ -41,16 +41,10 @@ class s21_obj {
   int i_array_size;
   std::vector<double>* vertex_array;
   std::vector<int>* index_array;
-  s21_panic* error;
 
  public:
   s21_obj();
   ~s21_obj();
-
-  void ParseEdge(std::string str);
-  void ParseVertex(std::string str, Min_Max_t* lim);
-  void ParseData(std::ifstream& File);
-  void ParsingFile(char* filename);
 
   void s21_rotate_x(double angle);
   void s21_rotate_y(double angle);
@@ -68,7 +62,31 @@ class s21_obj {
   std::vector<int>* get_index_array() const;
   double get_vertex_array(int i);
   int get_index_array(int i);
+
+  void set_v_arrey_size(int value);
+  void set_i_arrey_size(int value);
+  void set_vertex_array(double value);
+  void set_index_array(int value);
 };
+
+class s21_parser
+{
+private:
+  s21_obj* obj;
+  s21_panic* error;
+
+public:
+  s21_parser();
+  ~s21_parser();
+
+  void ParseEdge(std::string str);
+  void ParseVertex(std::string str, Min_Max_t* lim);
+  void ParseData(std::ifstream& File);
+  s21::s21_obj* ParsingFile(char* filename);
+
+  s21_obj* GetObj();
+};
+
 }  // namespace s21
 
 #endif  // S21_PARSER

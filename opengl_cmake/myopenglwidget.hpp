@@ -53,6 +53,7 @@ class myOpenGLWidget : public QOpenGLWidget {
 
  private:
   s21::s21_obj *obj;
+  s21::s21_parser *pars;
   settings_t settings;
   double proj_x, proj_y, proj_z;
 };
