@@ -105,6 +105,7 @@ lcov_test: clean_test clean_report
 	$(CXX) -fprofile-arcs -ftest-coverage $(SOURCE_TESTFILE) $(SOURCE) $(CXXLIBFLAGS) -o test
 	./test
 	lcov --capture --directory . --output-file coverage.info --ignore-errors mismatch,mismatch --ignore-errors inconsistent 
+	lcov --remove coverage.info '/usr/include/*' -o coverage.info
 	genhtml coverage.info --output-directory coverage_report
 	rm -rf *.gcno *.gcda
 
