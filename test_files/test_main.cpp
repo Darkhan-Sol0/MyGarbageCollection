@@ -27,8 +27,10 @@ TEST(Parser_Test_simp, Test_3) {
   s21::s21_obj *obj;
   s21::s21_parser *pars = new s21::s21_parser();
   char filename[] = "test_files/cube_simple.obj";
+  char filename1[] = "primitives/Cube.obj";
   obj = pars->ParsingFile(filename);
   obj->s21_move_x(0.0);
+  obj = pars->ParsingFile(filename1);
   delete pars;
 }
 
